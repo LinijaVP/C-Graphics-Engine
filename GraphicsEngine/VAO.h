@@ -8,7 +8,8 @@ class VAO {
 		GLuint ID;
 		VAO();
 		
-		void LinkVBO(VBO vbo, GLuint layout);
+		// Links a VBO Attribute such as a position or color to the VAO
+		void LinkAttrib(VBO& VBO, GLuint layout, GLuint numComponents, GLenum type, GLsizeiptr stride, void* offset);
 		void Bind();
 		void Unbind();
 		void Delete();

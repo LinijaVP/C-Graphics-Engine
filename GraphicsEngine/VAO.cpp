@@ -5,14 +5,13 @@ VAO::VAO() {
 	glGenVertexArrays(1, &ID);
 }
 
-void VAO::LinkVBO(VBO vbo, GLuint layout) {
-	vbo.Bind();
-	
-	//Configure vertex attribute so it knows how to read the VBO
-	glVertexAttribPointer(layout, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
+// Links a VBO Attribute such as a position or color to the VAO
+void VAO::LinkAttrib(VBO& VBO, GLuint layout, GLuint numComponents, GLenum type, GLsizeiptr stride, void* offset)
+{
+	VBO.Bind();
+	glVertexAttribPointer(layout, numComponents, type, GL_FALSE, stride, offset);
 	glEnableVertexAttribArray(layout);
-
-	vbo.Unbind();
+	VBO.Unbind();
 }
 
 void VAO::Bind() {

@@ -45,10 +45,15 @@ int main() {
 
 	// Enable depth write
 	glEnable(GL_DEPTH_TEST);
+	glDepthFunc(GL_LESS);
+	glEnable(GL_CULL_FACE);
+	glCullFace(GL_FRONT);
+	glFrontFace(GL_CCW);
 
 	Camera camera(width, height, glm::vec3(0.0f, 0.0f, 2.0f));
 
-	Model model("Models/sword/scene.gltf");
+	Model ground("Models/ground/scene.gltf");
+	Model trees("Models/trees/scene.gltf");
 
 	//for time manipulations
 	float prevTime = float(glfwGetTime());
@@ -75,7 +80,8 @@ int main() {
 		camera.updateMatrix(45.0f, 0.1f, 100.0f);
 
 		// Draw a model
-		model.Draw(shaderProgram, camera);
+		trees.Draw(shaderProgram, camera);
+		ground.Draw(shaderProgram, camera);
 
 		//Swap the back and the front buffer
 		glfwSwapBuffers(window);
